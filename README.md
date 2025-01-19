@@ -1,3 +1,3 @@
 # openaidemo
 
-Describe your project here.
+This will show to how interact with the OpenAI API

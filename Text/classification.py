@@ -7,12 +7,12 @@ api_key = os.getenv("OPENAI_API_KEY")
 from openai import OpenAI
 client = OpenAI()
 
-# Read the companies from the file using relative path
+# Read the course comments from the file using relative path
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, 'companies.txt')
+file_path = os.path.join(script_dir, 'classification.txt')
 
 with open(file_path, 'r') as file:
-    companies_text = file.read().strip()
+    course_classification = file.read().strip()
 
 response = client.chat.completions.create(
   model="gpt-4o-mini",
@@ -22,15 +22,15 @@ response = client.chat.completions.create(
       "content": [
         {
           "type": "text",
-          "text": f"Categorize the following companies: {companies_text}"
-       }
+          "text": f"classify the sentiment in the two statements and then provide a summary count for each classfication {course_classification}"     
+        }
       ]
     },
   ],
   response_format={
     "type": "text"
   },
-  # n=3,
+  n=3,
   max_completion_tokens=2048,
 )
 
